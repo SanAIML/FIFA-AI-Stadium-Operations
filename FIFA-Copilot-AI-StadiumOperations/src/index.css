@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 215 35% 6%;
+    --foreground: 210 40% 96%;
+    --card: 217 33% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 217 33% 10%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 213 94% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 28% 14%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 28% 14%;
+    --muted-foreground: 215 20% 60%;
+    --accent: 217 33% 14%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 28% 18%;
+    --input: 217 28% 16%;
+    --ring: 213 94% 58%;
+    --radius: 0.625rem;
+
+    --safe: 142 70% 45%;
+    --warning: 45 96% 51%;
+    --high: 28 92% 52%;
+    --critical: 0 84% 56%;
+
+    --chart-1: 213 94% 58%;
+    --chart-2: 142 70% 45%;
+    --chart-3: 45 96% 51%;
+    --chart-4: 28 92% 52%;
+    --chart-5: 0 84% 56%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .bg-radial-fade {
+    background: radial-gradient(ellipse at top, hsl(213 60% 14% / 0.5), transparent 60%);
+  }
+  .text-safe { color: hsl(var(--safe)); }
+  .text-warning { color: hsl(var(--warning)); }
+  .text-high { color: hsl(var(--high)); }
+  .text-critical { color: hsl(var(--critical)); }
+  .bg-safe { background-color: hsl(var(--safe)); }
+  .bg-warning { background-color: hsl(var(--warning)); }
+  .bg-high { background-color: hsl(var(--high)); }
+  .bg-critical { background-color: hsl(var(--critical)); }
+  .border-safe { border-color: hsl(var(--safe) / 0.5); }
+  .border-warning { border-color: hsl(var(--warning) / 0.5); }
+  .border-high { border-color: hsl(var(--high) / 0.5); }
+  .border-critical { border-color: hsl(var(--critical) / 0.5); }
+
+  .glass {
+    background: linear-gradient(180deg, hsl(var(--card) / 0.85), hsl(var(--card) / 0.6));
+    backdrop-filter: blur(8px);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 9999px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    70% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(0.8); opacity: 0; }
+  }
+  .animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+  @keyframes blink-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .animate-blink-soft { animation: blink-soft 1.6s ease-in-out infinite; }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-ticker { animation: ticker 40s linear infinite; }
+
+  .login-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--border) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.35) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  .login-radial {
+    background: radial-gradient(circle at 50% 0%, hsl(var(--primary) / 0.18), transparent 55%);
+  }
+
+  .login-map {
+    background-image:
+      radial-gradient(circle at 20% 30%, hsl(var(--primary) / 0.12) 0 2px, transparent 3px),
+      radial-gradient(circle at 70% 40%, hsl(var(--primary) / 0.1) 0 2px, transparent 3px),
+      radial-gradient(circle at 45% 70%, hsl(var(--primary) / 0.08) 0 2px, transparent 3px),
+      linear-gradient(120deg, transparent 0%, hsl(var(--primary) / 0.05) 50%, transparent 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 200% 100%;
+    animation: login-map-drift 18s linear infinite;
+  }
+
+  .login-scan {
+    background: linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.08) 50%, transparent 100%);
+    background-size: 100% 220%;
+    animation: login-scan 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+  }
+
+  .login-light-beam {
+    position: absolute;
+    top: -10%;
+    width: 2px;
+    height: 120%;
+    background: linear-gradient(180deg, hsl(var(--primary) / 0.8), transparent 75%);
+    filter: blur(1px);
+    animation: login-beam 4s ease-in-out infinite;
+  }
+
+  .login-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 9999px;
+    background: hsl(var(--primary) / 0.7);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.8);
+    animation: login-particle-float linear infinite;
+  }
+
+  .login-card {
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.12),
+      0 20px 60px hsl(var(--primary) / 0.12);
+  }
+
+  @keyframes login-map-drift {
+    0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: 0 0, 0 0, 0 0, 200% 0; }
+  }
+
+  @keyframes login-scan {
+    0% { background-position: 0 -120%; }
+    100% { background-position: 0 120%; }
+  }
+
+  @keyframes login-beam {
+    0%, 100% { opacity: 0.25; transform: scaleY(0.85); }
+    50% { opacity: 0.9; transform: scaleY(1); }
+  }
+
+  @keyframes login-particle-float {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+  }
+}
